@@ -1,9 +1,9 @@
 import cv2 as cv
 
 # โหลดรูปภาพ
-img = cv.imread('8arm.jpg')
+img = cv.imread('Me-2.jpg')
 if img is None:
-    print("Error: ไม่พบไฟล์ภาพ '8arm.jpg'")
+    print("Error: ไม่พบไฟล์ภาพ 'Me-2.jpg'")
     exit()
 
 # โหลดโมเดลตรวจจับใบหน้า
@@ -22,12 +22,13 @@ faces = face_model.detectMultiScale(gray_scale)
 for (x, y, w, h) in faces:
     cv.rectangle(img, (x, y), (x + w, y + h), (0, 0, 0), 2)
 
-
+# ย่อภาพก่อนแสดง (ขนาดหน้าต่างที่เหมาะสม)
+resized_img = cv.resize(img, (800, 800))
 
 # แสดงผลลัพธ์
-cv.imshow('Image', img)
+cv.imshow('Image', resized_img)
 
-# ใช้ waitKey() ให้แน่ใจว่าหน้าต่างจะไม่ปิดเอง
-key = cv.waitKey(0)  # รอให้ผู้ใช้กดปุ่ม
-if key == 27:  # ถ้ากด ESC -> ปิดหน้าต่าง
+# รอให้ผู้ใช้กดปุ่มเพื่อปิด
+key = cv.waitKey(0)
+if key == 27:
     cv.destroyAllWindows()
